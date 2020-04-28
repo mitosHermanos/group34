@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-------------------------------------------------------------------------------------------------------->
+    <style>
+        .multiselect {
+            width: 200px;
+        }
+
+        .selectBox {
+            position: relative;
+        }
+
+        .selectBox select {
+            width: 100%;
+            font-weight: bold;
+        }
+
+        .overSelect {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+
+        #checkboxes {
+            display: none;
+            border: 1px #dadada solid;
+        }
+
+        #checkboxes label {
+            display: block;
+        }
+
+        #checkboxes label:hover {
+            background-color: #1e90ff;
+        }
+    </style>
+
+    <!-------------------------------------------------------------------------------------------------------->
+    <title>Create certificate</title>
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+
+    <script src="js/createCert.js"></script>
+    <link rel="stylesheet" href="css/createCert.css">
+    <!------ Include the above in your HEAD tag ---------->
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.js"
+            integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+            crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            <a class="nav-item nav-link" href="certificates.html">Home </a>
+            <a class="nav-item nav-link" href="createRoot.html">Create root certificate</a>
+            <a class="nav-item nav-link active" href="createCert.html">Create certificate <span class="sr-only">(current)</span></a>
+            <a class="nav-item nav-link" href="readCert.html">Certificate list</a>
+        </div>
+    </div>
+</nav>
+
+
+<main>
+
+    <!--MDB Forms-->
+    <div class="container mt-4">
+
+        <div class="text-center darken-grey-text mb-4">
+        </div>
+
+        <!-- Grid row -->
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card ">
+                    <div class="card-body">
+                        <h3 class="text-center default-text py-3"><i class="fa fa-user"></i> Subject Data:</h3>
+                        <!--Body-->
+                        <div class="md-form">
+                            <input type="text" id="commonName" class="form-control">
+                            <label for="commonName">Common Name</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="countryName" class="form-control">
+                            <label for="countryName">CountryName</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="stateName" class="form-control">
+                            <label for="stateName">State name</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="localityName" class="form-control">
+                            <label for="localityName">Locality Name</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="organisationName" class="form-control">
+                            <label for="organisationName">Organisation name</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="organisationUnitName" class="form-control">
+                            <label for="organisationUnitName">Organisation unit name</label>
+                        </div>
+                        <div class="md-form">
+                            <input type="text" id="email" class="form-control">
+                            <label for="email">Email</label>
+                        </div>
+                        <div class="md-form">
+                            <i class="fa fa-lock prefix grey-text"></i>
+                            <input type="password" id="keyPassword" class="form-control">
+                            <label for="keyPassword">Key Password</label>
+                        </div>
+                        <div class="md-form">
+                            <i class="fa fa-lock prefix grey-text"></i>
+                            <input type="password" id="keyStorePassword" class="form-control">
+                            <label for="keyStorePassword">KeyStore Password</label>
+                        </div>
+
+
+                        <div class="text-center">
+                            <button class="btn btn-default waves-effect waves-light" id="btnNext">Next</button>
+                        </div>
+                        <div id="afterNext">
+
+                            <div class="md-form">
+                                <select id="issuerCA" name="issuerCA" class="form-control">
+                                    <option disabled selected value>Choose Issuer</option>
+                                </select>
+                            </div>
+                            <div class="md-form">
+                                <i class="fa fa-lock prefix grey-text"></i>
+                                <input type="password" id="keyPasswordIssuer" class="form-control">
+                                <label for="keyPasswordIssuer">Key Password for issuer</label>
+                            </div>
+                            <div class="md-form">
+                                <input type="text" id="alias" class="form-control">
+                                <label for="alias">Alias</label>
+                            </div>
+
+                            <div class="text-center">
+                                <button class="btn btn-default waves-effect waves-light" id="btnNext2">Next</button>
+                            </div>
+
+                            <div id="afterNext2">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" id="CA" value="">  CA</label>
+                                </div>
+                                <!--<div class="md-form">
+                                    <select id="template" class="form-control" >
+                                        <option disabled selected value>Template</option>
+                                        <option value="Server Auth">Server Auth</option>
+                                        <option value="Client Auth">Client Auth</option>
+                                        <option value="Code signing">Code signing</option>
+                                        <option value="Email protection">Email protection</option>
+                                        <option value="Time stamping">Time stamping</option>
+                                        <option value="OCSP signing">OCSP signing</option>
+                                        <option value="CA">CA</option>
+                                    </select>-->
+                                <div class="multiselect">
+                                    <div class="selectBox" onclick="showCheckboxes()">
+                                        <select>
+                                            <option>Template</option>
+                                        </select>
+                                        <div class="overSelect"></div>
+                                    </div>
+                                    <div id="checkboxes">
+                                        <!--                                                        <label for="server_auth">-->
+                                        <!--                                                            <input type="checkbox" id="server_auth" />Server Auth</label>-->
+                                        <!--                                                        <label for="client_auth">-->
+                                        <!--                                                            <input type="checkbox" id="client_auth" />Client Auth</label>-->
+                                        <!--                                                        <label for="code_signing">-->
+                                        <!--                                                            <input type="checkbox" id="code_signing" />Code signing</label>-->
+                                        <!--                                                        <label for="email_protection">-->
+                                        <!--                                                            <input type="checkbox" id="email_protection" />Email protection</label>-->
+                                        <!--                                                        <label for="time_stamping">-->
+                                        <!--                                                            <input type="checkbox" id="time_stamping" />Time stamping</label>-->
+                                        <!--                                                        <label for="OCSP_signing">-->
+                                        <!--                                                            <input type="checkbox" id="OCSP_signing" />OCSP signing</label>-->
+                                    </div>
+                                </div>
+
+                                <script>
+
+                                    var expanded = false;
+
+                                    function showCheckboxes() {
+                                        var checkboxes = document.getElementById("checkboxes");
+                                        if (!expanded) {
+                                            checkboxes.style.display = "block";
+                                            expanded = true;
+                                        } else {
+                                            checkboxes.style.display = "none";
+                                            expanded = false;
+                                        }
+                                    }
+                                </script>
+
+
+
+                                <div class="text-center">
+                                    <button class="btn btn-default waves-effect waves-light" id="btnCreate">Create and sign</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Grid column -->
+            </div>
+
+        </div>
+        <!-- Grid row -->
+
+
+    </div>
+    <!-- Grid row -->
+
+    <hr class="my-4">
+
+
+
+    </div>
+    <!--MDB Forms-->
+
+</main>
+
+
+
+<!-- MDB core JavaScript -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/js/mdb.min.js"></script>
+
+
+</body>
+</html>
